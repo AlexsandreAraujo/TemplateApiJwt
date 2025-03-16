@@ -4,7 +4,12 @@ namespace TemplateApiJwt.Infraestrutura.Repositories;
 
 public class EmployeeRepository : IEmployeeRepository
 {
-  private readonly ConnectionContext _context = new ConnectionContext();
+  private readonly ConnectionContext _context;
+
+  public EmployeeRepository(ConnectionContext context)
+  {
+    _context = context;
+  }
 
   public void Add(Employee employee)
   {

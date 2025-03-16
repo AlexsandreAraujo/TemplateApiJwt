@@ -11,7 +11,7 @@ using TemplateApiJwt.Infraestrutura;
 namespace TemplateApiJwt.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    [Migration("20250316174130_Initial")]
+    [Migration("20250316191007_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

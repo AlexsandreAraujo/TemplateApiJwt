@@ -8,9 +8,9 @@ namespace TemplateApiJwt.Application.Services;
 
 public class TokenService
 {
-  public static object GenerateToken(Employee employee)
+  public static object GenerateToken(IConfiguration configuration, Employee employee)
   {
-    var key = Encoding.ASCII.GetBytes(Key.Secret);
+    var key = Encoding.ASCII.GetBytes(configuration["Configurations:TokenConfigurations:Key"]);
     var tokenConfig = new SecurityTokenDescriptor
     {
       Subject = new ClaimsIdentity(new Claim[]

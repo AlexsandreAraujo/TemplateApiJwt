@@ -1,19 +1,23 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using TemplateApiJwt;
 using TemplateApiJwt.Infraestrutura.Repositories;
 using TemplateApiJwt.Domain.Model.EmployeeAggregate;
 using TemplateApiJwt.Application.Mapping;
+using TemplateApiJwt.Infraestrutura;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ConnectionContext>
+    (options => options.UseNpgsql(builder.Configuration["Configurations:ConnectionStrings:DefaultConnection"]));
+
 builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
-var key = Encoding.ASCII.GetBytes(Key.Secret);
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Configurations:TokenConfigurations:Key"]);
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
