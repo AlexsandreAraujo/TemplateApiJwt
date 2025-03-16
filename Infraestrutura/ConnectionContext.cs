@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using TemplateApiJwt.Model;
+using TemplateApiJwt.Domain.Model.CompanyAggregate;
+using TemplateApiJwt.Domain.Model.EmployeeAggregate;
 
 namespace TemplateApiJwt.Infraestrutura;
 
 public class ConnectionContext : DbContext
 {
   public DbSet<Employee> Employees { get; set; }
+  public DbSet<Company> Companies { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {

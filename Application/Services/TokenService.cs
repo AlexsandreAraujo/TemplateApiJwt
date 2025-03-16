@@ -2,9 +2,9 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using TemplateApiJwt.Model;
+using TemplateApiJwt.Domain.Model.EmployeeAggregate;
 
-namespace TemplateApiJwt.Services;
+namespace TemplateApiJwt.Application.Services;
 
 public class TokenService
 {

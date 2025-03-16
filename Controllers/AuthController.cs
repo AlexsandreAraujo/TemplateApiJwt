@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TemplateApiJwt.Services;
+using TemplateApiJwt.Application.Services;
+using TemplateApiJwt.Domain.Model.EmployeeAggregate;
 
 namespace TemplateApiJwt.Controllers
 {
@@ -12,7 +13,7 @@ namespace TemplateApiJwt.Controllers
         {
             if (username == "admin" && password == "admin")
             {
-                var token = TokenService.GenerateToken(new Model.Employee(username, 23, null));
+                var token = TokenService.GenerateToken(new Employee());
                 return Ok(token);
             }
 

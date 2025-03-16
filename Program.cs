@@ -2,12 +2,15 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TemplateApiJwt;
-using TemplateApiJwt.Infraestrutura;
-using TemplateApiJwt.Model;
+using TemplateApiJwt.Infraestrutura.Repositories;
+using TemplateApiJwt.Domain.Model.EmployeeAggregate;
+using TemplateApiJwt.Application.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
+
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
 var key = Encoding.ASCII.GetBytes(Key.Secret);

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TemplateApiJwt.Model;
-using TemplateApiJwt.ViewModel;
+using AutoMapper;
+using TemplateApiJwt.Application.ViewModel;
+using TemplateApiJwt.Domain.Model.EmployeeAggregate;
+using TemplateApiJwt.Domain.DTOs;
 
 namespace TemplateApiJwt.Controllers
 {
@@ -11,11 +13,13 @@ namespace TemplateApiJwt.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper)
         {
             _employeeRepository = employeeRepository ?? throw new System.ArgumentNullException(nameof(employeeRepository));
             _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         [Authorize]
@@ -65,6 +69,18 @@ namespace TemplateApiJwt.Controllers
             _logger.LogInformation("Teste Log Information");
 
             return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult GetById(int id)
+        {
+
+            var employees = _employeeRepository.Get(id);
+
+            var EmployeeDTO = _mapper.Map<EmployeeDTO>(employees);
+
+            return Ok(EmployeeDTO);
         }
     }
 }

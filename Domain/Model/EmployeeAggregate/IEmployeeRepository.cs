@@ -1,4 +1,4 @@
-namespace TemplateApiJwt.Model;
+namespace TemplateApiJwt.Domain.Model.EmployeeAggregate;
 
 public interface IEmployeeRepository
 {

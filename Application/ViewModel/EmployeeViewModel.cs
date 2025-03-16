@@ -1,4 +1,4 @@
-namespace TemplateApiJwt.ViewModel;
+namespace TemplateApiJwt.Application.ViewModel;
 
 public class EmployeeViewModel
 {
