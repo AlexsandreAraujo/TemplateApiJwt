@@ -31,7 +31,9 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateAudience = false,
+        ValidateLifetime = true, // Adiciona a validação do tempo de vida
+        ClockSkew = TimeSpan.Zero // Define a tolerância de tempo para zero
     };
 });
 
@@ -54,6 +56,7 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
